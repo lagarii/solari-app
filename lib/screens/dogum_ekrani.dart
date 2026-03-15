@@ -30,10 +30,15 @@ class _DogumEkraniState extends State<DogumEkrani> {
         ulke: 'TR',
       );
       if (mounted && data['nakshatra'] != null) {
+        final dogumTarihi =
+            '${secilenTarih.year}-${secilenTarih.month.toString().padLeft(2, '0')}-${secilenTarih.day.toString().padLeft(2, '0')}';
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (_) => SohbetEkrani(nakshatra: data['nakshatra']),
+            builder: (_) => SohbetEkrani(
+              nakshatra: data['nakshatra'],
+              dogumTarihi: dogumTarihi,
+            ),
           ),
         );
       }

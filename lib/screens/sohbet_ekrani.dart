@@ -3,7 +3,8 @@ import '../services/api.dart';
 
 class SohbetEkrani extends StatefulWidget {
   final String nakshatra;
-  const SohbetEkrani({super.key, required this.nakshatra});
+  final String dogumTarihi;
+  const SohbetEkrani({super.key, required this.nakshatra, this.dogumTarihi = ''});
 
   @override
   State<SohbetEkrani> createState() => _SohbetEkraniState();
@@ -27,6 +28,11 @@ class _SohbetEkraniState extends State<SohbetEkrani> {
     _karsilamaGonder();
   }
 
+  String get _bugun {
+    final now = DateTime.now();
+    return '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
+  }
+
   Future<void> _karsilamaGonder() async {
     setState(() => yukleniyor = true);
     try {
@@ -34,6 +40,8 @@ class _SohbetEkraniState extends State<SohbetEkrani> {
         soru: 'Benim nakshatra\'m ${widget.nakshatra}. Bana sıcak ve kişisel bir karşılama mesajı yaz. Bu nakshatra\'nın en özel özelliğini bir cümleyle anlat ve beni soru sormaya davet et.',
         nakshatra: widget.nakshatra,
         dil: secilenDil,
+        dogumTarihi: widget.dogumTarihi,
+        bugun: _bugun,
       );
       setState(() {
         mesajlar.add({'tip': 'solari', 'metin': data['yanit'] ?? ''});
@@ -56,6 +64,8 @@ class _SohbetEkraniState extends State<SohbetEkrani> {
         soru: soru,
         nakshatra: widget.nakshatra,
         dil: secilenDil,
+        dogumTarihi: widget.dogumTarihi,
+        bugun: _bugun,
       );
       setState(() {
         mesajlar.add({'tip': 'solari', 'metin': data['yanit'] ?? 'Cevap alınamadı'});

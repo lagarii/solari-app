@@ -71,6 +71,8 @@ class ApiService {
     required String soru,
     required String nakshatra,
     required String dil,
+    String dogumTarihi = '',
+    String bugun = '',
   }) async {
     final token = await getToken();
     final res = await http.post(
@@ -79,7 +81,13 @@ class ApiService {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
       },
-      body: jsonEncode({'soru': soru, 'nakshatra': nakshatra, 'dil': dil}),
+      body: jsonEncode({
+        'soru': soru,
+        'nakshatra': nakshatra,
+        'dil': dil,
+        'dogum_tarihi': dogumTarihi,
+        'bugun': bugun,
+      }),
     );
     return jsonDecode(utf8.decode(res.bodyBytes));
   }
