@@ -21,6 +21,28 @@ class _SohbetEkraniState extends State<SohbetEkrani> {
     'it': '🇮🇹 Italiano', 'pt': '🇧🇷 Português', 'hi': '🇮🇳 हिंदी', 'de': '🇩🇪 Deutsch',
   };
 
+  @override
+  void initState() {
+    super.initState();
+    _karsilamaGonder();
+  }
+
+  Future<void> _karsilamaGonder() async {
+    setState(() => yukleniyor = true);
+    try {
+      final data = await ApiService.soruSor(
+        soru: '${widget.nakshatra} nakshatra\'sında doğan biri hakkında kısa ve ilham verici bir karşılama mesajı yaz.',
+        nakshatra: widget.nakshatra,
+        dil: secilenDil,
+      );
+      setState(() {
+        mesajlar.add({'tip': 'solari', 'metin': data['yanit'] ?? ''});
+        kalanSoru = data['kalan_soru'];
+      });
+    } catch (_) {}
+    setState(() => yukleniyor = false);
+  }
+
   Future<void> _soruSor() async {
     if (soruCtrl.text.isEmpty) return;
     final soru = soruCtrl.text;
