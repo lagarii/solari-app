@@ -149,7 +149,7 @@ class _SohbetEkraniState extends State<SohbetEkrani> {
                           color: benMiyim ? const Color(0xFF533483) : Colors.white12,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Text(m['metin']!, style: const TextStyle(color: Colors.white)),
+                        child: SelectableText(m['metin']!, style: const TextStyle(color: Colors.white)),
                       ),
                     );
                   },
