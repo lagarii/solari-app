@@ -48,7 +48,12 @@ class _SohbetEkraniState extends State<SohbetEkrani> {
         mesajlar.add({'tip': 'solari', 'metin': data['yanit'] ?? ''});
         kalanSoru = data['kalan_soru'];
       });
-    } catch (_) {}
+    } catch (e) {
+      setState(() => mesajlar.add({
+        'tip': 'solari',
+        'metin': 'Ücretsiz soru hakkın doldu. Solari ile konuşmaya devam etmek için premium\'a geçebilirsin.',
+      }));
+    }
     setState(() => yukleniyor = false);
   }
 
