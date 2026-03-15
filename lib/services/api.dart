@@ -73,6 +73,7 @@ class ApiService {
     required String dil,
     String dogumTarihi = '',
     String bugun = '',
+    bool karsilama = false,
   }) async {
     final token = await getToken();
     final res = await http.post(
@@ -87,6 +88,7 @@ class ApiService {
         'dil': dil,
         'dogum_tarihi': dogumTarihi,
         'bugun': bugun,
+        'karsilama': karsilama,
       }),
     );
     return jsonDecode(utf8.decode(res.bodyBytes));

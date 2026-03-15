@@ -37,11 +37,12 @@ class _SohbetEkraniState extends State<SohbetEkrani> {
     setState(() => yukleniyor = true);
     try {
       final data = await ApiService.soruSor(
-        soru: 'Benim nakshatra\'m ${widget.nakshatra}. Bana sıcak ve kişisel bir karşılama mesajı yaz. Bu nakshatra\'nın en özel özelliğini bir cümleyle anlat ve beni soru sormaya davet et.',
+        soru: '',
         nakshatra: widget.nakshatra,
         dil: secilenDil,
         dogumTarihi: widget.dogumTarihi,
         bugun: _bugun,
+        karsilama: true,
       );
       setState(() {
         mesajlar.add({'tip': 'solari', 'metin': data['yanit'] ?? ''});
