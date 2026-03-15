@@ -30,8 +30,13 @@ class _GirisEkraniState extends State<GirisEkrani> {
         }
       } else if (kayitModu && data['mesaj'] != null) {
         setState(() => kayitModu = false);
-        ScaffoldMessenger.of(context).showSnackBar(
+        if (mounted) ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Kayıt başarılı! Giriş yapabilirsiniz.')),
+        );
+      } else {
+        final hata = data['detail'] ?? 'Bir hata oluştu';
+        if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(hata), backgroundColor: Colors.red[800]),
         );
       }
     } catch (e) {
